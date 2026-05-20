@@ -1,0 +1,50 @@
+flowchart TD
+    subgraph Generators["🐍 Data Generators (src/data_generators/)"]
+        G1[claim_accumulated_snapshot]
+        G2[claim_periodic_snapshot]
+        G3[fact_policy_transactions]
+        G4[factless_accident_events]
+        G5[premium_periodic_snapshot]
+    end
+
+    subgraph RawData["📁 Raw Data (data/raw/)"]
+        R1[Parquet files per domain]
+    end
+
+    subgraph Ingestion["⚙️ Ingestion (src/pipeline/)"]
+        DLT[dlt pipeline\nparquet → DuckDB raw schema]
+    end
+
+    subgraph DuckDB["🦆 DuckDB + dbt Transform (data/db.duckdb)"]
+        S_RAW[raw schema\nParquet ingested via dlt]
+        S_RAW --> STG[staging_* schemas\nlight cleaning & renaming]
+        STG --> MART[mart_* schemas\nstar schemas per domain]
+        MART --> RPT[reporting_* schemas\npresentation-ready views]
+    end
+
+    subgraph Exports["📦 Exports (data/exports/)"]
+        E1[Parquet files per reporting schema]
+    end
+
+    subgraph PowerBI["📊 Power BI (powerbi/)"]
+        PB1[.pbip + Report + SemanticModel\nper reporting domain]
+    end
+
+    DOM["📋 Insurance Domains\nclaim acc. snapshot · claim periodic snapshot\npolicy transactions · accident events\npremium periodic snapshot · consolidated"]
+
+    G1 & G2 & G3 & G4 & G5 -->|generate Parquet| RawData
+    RawData --> DLT
+    DLT --> S_RAW
+
+    RPT -->|export_reporting.py| E1
+    E1 -->|generate_powerbi.py| PB1
+
+    MART & RPT -.->|covers| DOM
+
+    classDef tool fill:#f0f4ff,stroke:#6b7dbb,color:#1a1a2e
+    classDef storage fill:#fff8e7,stroke:#c9a227,color:#3d2b00
+    classDef output fill:#eafaf1,stroke:#27ae60,color:#0b3d20
+
+    class DLT,STG,MART,RPT tool
+    class S_RAW,RawData storage
+    class E1,PB1 output
