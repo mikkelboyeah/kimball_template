@@ -1,0 +1,146 @@
+version: 2
+
+models:
+  - name: fact_claim_accumulating_snapshot
+    description: "{{ doc('table_fact_claim_accumulating_snapshot') }}"
+    columns:
+      - name: claim_id
+        description: "{{ doc('column_claim_id') }}"
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_claim')
+                field: claim_id
+      - name: claim_open_date_id
+        description: "{{ doc('column_claim_open_date_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_id
+      - name: claim_accident_date_id
+        description: "{{ doc('column_claim_accident_date_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_id
+      - name: claim_estimate_date_id
+        description: "{{ doc('column_claim_estimate_date_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_id
+      - name: claim_1st_payment_date_id
+        description: "{{ doc('column_claim_1st_payment_date_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_id
+      - name: claim_most_recent_payment_date_id
+        description: "{{ doc('column_claim_most_recent_payment_date_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_id
+      - name: claim_subrogation_date_id
+        description: "{{ doc('column_claim_subrogation_date_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_id
+      - name: claim_close_date_id
+        description: "{{ doc('column_claim_close_date_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_id
+      - name: policyholder_id
+        description: "{{ doc('column_policyholder_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_policyholder')
+                field: policyholder_id
+      - name: claim_supervisor_id
+        description: "{{ doc('column_claim_supervisor_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_employee')
+                field: employee_id
+      - name: agent_id
+        description: "{{ doc('column_agent_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_employee')
+                field: employee_id
+      - name: coverage_id
+        description: "{{ doc('column_coverage_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_coverage')
+                field: coverage_id
+      - name: covered_item_id
+        description: "{{ doc('column_covered_item_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_covered_item')
+                field: covered_item_id
+      - name: claimant_id
+        description: "{{ doc('column_claimant_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_claimant')
+                field: claimant_id
+      - name: claim_status_id
+        description: "{{ doc('column_claim_status_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_claim_status')
+                field: claim_status_id
+      - name: claim_profile_id
+        description: "{{ doc('column_claim_profile_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_claim_profile')
+                field: claim_profile_id
+      - name: policy_number
+        description: "{{ doc('column_policy_number') }}"
+      - name: original_reserve_nok_amount
+        description: "{{ doc('column_original_reserve_nok_amount') }}"
+      - name: estimate_nok_amount
+        description: "{{ doc('column_estimate_nok_amount') }}"
+      - name: current_reserve_to_date_nok_amount
+        description: "{{ doc('column_current_reserve_to_date_nok_amount') }}"
+      - name: claim_paid_to_date_nok_amount
+        description: "{{ doc('column_claim_paid_to_date_nok_amount') }}"
+      - name: salvage_collected_to_date_nok_amount
+        description: "{{ doc('column_salvage_collected_to_date_nok_amount') }}"
+      - name: subro_payment_collected_to_date_nok_amount
+        description: "{{ doc('column_subro_payment_collected_to_date_nok_amount') }}"
+      - name: claim_accident_to_open_lag
+        description: "{{ doc('column_claim_accident_to_open_lag') }}"
+      - name: claim_open_to_estimate_lag
+        description: "{{ doc('column_claim_open_to_estimate_lag') }}"
+      - name: claim_open_to_1st_payment_lag
+        description: "{{ doc('column_claim_open_to_1st_payment_lag') }}"
+      - name: claim_open_to_subrogation_lag
+        description: "{{ doc('column_claim_open_to_subrogation_lag') }}"
+      - name: claim_open_to_closed_lag
+        description: "{{ doc('column_claim_open_to_closed_lag') }}"
+      - name: number_of_claim_transactions
+        description: "{{ doc('column_number_of_claim_transactions') }}"

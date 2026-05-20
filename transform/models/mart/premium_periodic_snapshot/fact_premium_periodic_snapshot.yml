@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: fact_premium_periodic_snapshot
+    description: "{{ doc('table_fact_premium_periodic_snapshot') }}"
+    columns:
+      - name: month_end_snapshot_date_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_id
+        description: "{{ doc('column_month_end_snapshot_date_id') }}"
+      - name: policyholder_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_policyholder')
+                field: policyholder_id
+        description: "{{ doc('column_policyholder_id') }}"
+      - name: agent_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_employee')
+                field: employee_id
+        description: "{{ doc('column_agent_id') }}"
+      - name: coverage_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_coverage')
+                field: coverage_id
+        description: "{{ doc('column_coverage_id') }}"
+      - name: covered_item_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_covered_item')
+                field: covered_item_id
+        description: "{{ doc('column_covered_item_id') }}"
+      - name: policy_status_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_policy_status')
+                field: policy_status_id
+        description: "{{ doc('column_policy_status_id') }}"

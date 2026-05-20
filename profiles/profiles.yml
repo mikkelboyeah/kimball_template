@@ -1,0 +1,13 @@
+default:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: '{{ env_var("DB_PATH", "../data/db.duckdb") }}'
+      schema: public
+      threads: 1
+    prod:
+      type: duckdb
+      path: '{{ env_var("DB_PATH", "../data/db.duckdb") }}'
+      schema: public
+      threads: 1

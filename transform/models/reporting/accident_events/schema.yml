@@ -1,0 +1,38 @@
+version: 2
+models:
+  - name: fact_accident_events_reporting
+    config:
+      alias: fact_accident_events
+    description: "{{ doc('table_fact_accident_events') }}"
+  - name: dim_policyholder_accident_events
+    config:
+      alias: dim_policyholder
+    description: "{{ doc('table_dim_policyholder') }}"
+  - name: dim_loss_party_accident_events
+    config:
+      alias: dim_loss_party
+    description: "{{ doc('table_dim_loss_party') }}"
+  - name: dim_loss_party_role_accident_events
+    config:
+      alias: dim_loss_party_role
+    description: "{{ doc('table_dim_loss_party_role') }}"
+  - name: dim_coverage_accident_events
+    config:
+      alias: dim_coverage
+    description: "{{ doc('table_dim_coverage') }}"
+  - name: dim_covered_item_accident_events
+    config:
+      alias: dim_covered_item
+    description: "{{ doc('table_dim_covered_item') }}"
+  - name: dim_date_accident_events
+    config:
+      alias: dim_date
+    description: "{{ doc('table_dim_date') }}"
+  - name: dim_claim_profile_accident_events
+    config:
+      alias: dim_claim_profile
+    description: "{{ doc('table_dim_claim_profile') }}"
+  - name: dim_claimant_accident_events
+    config:
+      alias: dim_claimant
+    description: "{{ doc('table_dim_claimant') }}"

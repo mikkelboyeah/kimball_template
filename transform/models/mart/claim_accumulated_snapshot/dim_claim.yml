@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: dim_claim
+    description: "{{ doc('table_dim_claim') }}"
+    columns:
+      - name: claim_id
+        description: "{{ doc('column_claim_id') }}"
+        tests:
+          - unique
+          - not_null
+      - name: claim_number
+        description: "{{ doc('column_claim_number') }}"
+      - name: loss_description
+        description: "{{ doc('column_loss_description') }}"
+      - name: fault_indicator
+        description: "{{ doc('column_fault_indicator') }}"

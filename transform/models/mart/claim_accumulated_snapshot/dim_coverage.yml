@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: dim_coverage
+    description: "{{ doc('table_dim_coverage') }}"
+    columns:
+      - name: coverage_id
+        description: "{{ doc('column_coverage_id') }}"
+        tests:
+          - unique
+          - not_null
+      - name: coverage_code
+        description: "{{ doc('column_coverage_code') }}"
+      - name: line_of_business
+        description: "{{ doc('column_line_of_business') }}"
+      - name: coverage_type
+        description: "{{ doc('column_coverage_type') }}"
+      - name: deductible_amount
+        description: "{{ doc('column_deductible_amount') }}"
+      - name: coverage_limit
+        description: "{{ doc('column_coverage_limit') }}"

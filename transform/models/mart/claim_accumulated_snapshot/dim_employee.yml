@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: dim_employee
+    description: "{{ doc('table_dim_employee') }}"
+    columns:
+      - name: employee_id
+        description: "{{ doc('column_employee_id') }}"
+        tests:
+          - unique
+          - not_null
+      - name: employee_natural_id
+        description: "{{ doc('column_employee_natural_id') }}"
+      - name: first_name
+        description: "{{ doc('column_first_name') }}"
+      - name: last_name
+        description: "{{ doc('column_last_name') }}"
+      - name: job_title
+        description: "{{ doc('column_job_title') }}"
+      - name: region
+        description: "{{ doc('column_region') }}"

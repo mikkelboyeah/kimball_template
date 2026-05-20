@@ -1,0 +1,140 @@
+version: "3"
+
+tasks:
+  bootstrap:
+    desc: Install Python deps and create empty DB
+    cmds:
+      - uv sync
+      - mkdir -p data
+      - uv run python -c "import duckdb; duckdb.connect('data/db.duckdb').execute('SELECT 1;')"
+
+  default:
+    desc: List available tasks
+    cmds:
+      - task --list
+
+  drop-db:
+    desc: Removes the database
+    cmds:
+      - rm data/db.duckdb
+
+  delete-raw-files:
+    desc: Deletes all parquet files and subfolders within the data/raw subfolder
+    cmds:
+      - rm -rf data/raw/*
+
+  delete-exports-files:
+    desc: Deletes all parquet files and subfolders within the data/exports subfolder
+    cmds:
+      - rm -rf data/exports/*
+
+  delete-powerbi-files:
+    desc: Deletes all files and folders in the powerbi folder
+    cmds:
+      - rm -rf powerbi/*
+
+  delete-dlt-pipelines:
+    desc: Deletes DLT pipeline state to avoid permission and state issues
+    cmds:
+      - rm -rf .dlt/pipelines/*
+
+  delete-all-data-files:
+    desc: Deletes all parquet files in raw and exports, all Power BI files, and DLT state
+    cmds:
+      - task: delete-powerbi-files
+      - task: delete-exports-files
+      - task: delete-raw-files
+      - task: delete-dlt-pipelines
+
+  delete-all-and-full-load:
+    desc: Drop and recreate database along with executing the full data pipeline
+    cmds:
+      - task: delete-all-data-files
+      - task: drop-db
+      - task: full-load
+
+  full-load:
+    desc: Run the full data pipeline (bootstrap + generate + ingest + transform-prod + generate-powerbi)
+    cmds:
+      - task: bootstrap
+      - task: generate-data
+      - task: ingest
+      - task: transform-prod
+      - task: export-reporting
+      - task: generate-powerbi
+
+  generate-data:
+    desc: Generate mock insurance data as Parquet files
+    cmds:
+      - uv run python src/data_generators/claim_accumulated_snapshot/generate_facts.py
+      - uv run python src/data_generators/claim_accumulated_snapshot/generate_dims.py
+      - uv run python src/data_generators/fact_policy_transactions/generate_facts.py
+      - uv run python src/data_generators/fact_policy_transactions/generate_dims.py
+      - uv run python src/data_generators/premium_periodic_snapshot/generate_facts.py
+      - uv run python src/data_generators/premium_periodic_snapshot/generate_dims.py
+      - uv run python src/data_generators/claim_periodic_snapshot/generate_facts.py
+      - uv run python src/data_generators/factless_accident_events/generate_facts.py
+      - uv run python src/data_generators/factless_accident_events/generate_dims.py
+
+
+  ingest:
+    desc: "Load data via dlt. Usage: 'task ingest -- [subfolder]'. Use '-- --help' for options."
+    env:
+      DB_PATH: "{{.TASKFILE_DIR}}/data/db.duckdb"
+    cmds:
+      - uv run ingest {{.CLI_ARGS}}
+
+  ingest:ui:
+    desc: Launch the dlt UI to inspect the ingestion state
+    cmds:
+      - uv run dlt pipeline template_pipeline show
+
+  test:
+    desc: Run pytest to validate the database architecture and pipelines.
+    cmds:
+      - uv run python -m pytest tests/
+
+  transform:
+    desc: Build dbt models in dev, deferring to prod state if it exists. Use '-- -s model_name' to pass arguments.
+    env:
+      DB_PATH: "{{.TASKFILE_DIR}}/data/db.duckdb"
+    cmds:
+      - uv run dbt deps --project-dir transform --profiles-dir profiles
+      - |
+        if [ -f "transform/target_prod/manifest.json" ]; then
+          uv run dbt build --project-dir transform --profiles-dir profiles --defer --state target_prod {{.CLI_ARGS}}
+        else
+          uv run dbt build --project-dir transform --profiles-dir profiles {{.CLI_ARGS}}
+        fi
+
+  transform-prod:
+    desc: Build dbt models using the prod profile for production ready schemas.
+    env:
+      DB_PATH: "{{.TASKFILE_DIR}}/data/db.duckdb"
+    cmds:
+      - uv run dbt deps --project-dir transform --profiles-dir profiles
+      - uv run dbt build --project-dir transform --profiles-dir profiles --target prod {{.CLI_ARGS}}
+      - mkdir -p transform/target_prod
+      - cp transform/target/manifest.json transform/target_prod/manifest.json
+
+  export-reporting:
+    desc: Export reporting models to Parquet files in data/exports folder
+    env:
+      DB_PATH: "{{.TASKFILE_DIR}}/data/db.duckdb"
+    cmds:
+      - uv run python src/export_reporting/export_reporting.py
+
+  generate-powerbi:
+    desc: Generate Power BI PBIP folders pointing to exported Parquet files. Custom root "task generate-powerbi ROOT="C:/Your/Path"
+    vars:
+      ROOT: '{{default "" .ROOT}}'
+    env:
+      PYTHONPATH: "."
+    cmds:
+      - task: delete-powerbi-files
+      - uv run python src/generate_powerbi/generate_powerbi.py {{if .ROOT}}--root "{{.ROOT}}"{{end}}
+
+  ui:
+    desc: Launch the DuckDB UI
+    cmds:
+      - uv run db-ui

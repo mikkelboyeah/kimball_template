@@ -1,0 +1,69 @@
+version: 2
+
+models:
+  - name: fact_policy_transaction
+    description: "{{ doc('table_fact_policy_transaction') }}"
+    columns:
+      - name: policy_number
+        description: "{{ doc('column_policy_number') }}"
+      - name: policy_transaction_number
+        description: "{{ doc('column_policy_transaction_number') }}"
+        tests:
+          - unique
+          - not_null
+      - name: policy_transaction_date_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_id
+        description: "{{ doc('column_policy_transaction_date_id') }}"
+      - name: policy_effective_date_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_id
+        description: "{{ doc('column_policy_effective_date_id') }}"
+      - name: policyholder_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_policyholder')
+                field: policyholder_id
+        description: "{{ doc('column_policyholder_id') }}"
+      - name: employee_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_employee')
+                field: employee_id
+        description: "{{ doc('column_employee_id') }}"
+      - name: coverage_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_coverage')
+                field: coverage_id
+        description: "{{ doc('column_coverage_id') }}"
+      - name: covered_item_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_covered_item')
+                field: covered_item_id
+        description: "{{ doc('column_covered_item_id') }}"
+      - name: policy_transaction_type_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_policy_transaction_type')
+                field: policy_transaction_type_id
+        description: "{{ doc('column_policy_transaction_type_id') }}"
+      - name: policy_transaction_audit_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_policy_transaction_audit')
+                field: policy_transaction_audit_id
+        description: "{{ doc('column_policy_transaction_audit_id') }}"

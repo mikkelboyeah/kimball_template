@@ -1,0 +1,94 @@
+version: 2
+
+models:
+  - name: fact_accident_events
+    description: "{{ doc('table_fact_accident_events') }}"
+    columns:
+      - name: claim_loss_date_id
+        description: "{{ doc('column_claim_loss_date_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_id
+      - name: policyholder_id
+        description: "{{ doc('column_policyholder_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_policyholder')
+                field: policyholder_id
+      - name: coverage_id
+        description: "{{ doc('column_coverage_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_coverage')
+                field: coverage_id
+      - name: covered_item_id
+        description: "{{ doc('column_covered_item_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_covered_item')
+                field: covered_item_id
+      - name: claimant_id
+        description: "{{ doc('column_claimant_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_claimant')
+                field: claimant_id
+      - name: loss_party_id
+        description: "{{ doc('column_loss_party_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_loss_party')
+                field: loss_party_id
+      - name: loss_party_role_id
+        description: "{{ doc('column_loss_party_role_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_loss_party_role')
+                field: loss_party_role_id
+      - name: claim_profile_id
+        description: "{{ doc('column_claim_profile_id') }}"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_claim_profile')
+                field: claim_profile_id
+      - name: claim_number_dd
+        description: "{{ doc('column_claim_number_dd') }}"
+      - name: policy_number_dd
+        description: "{{ doc('column_policy_number_dd') }}"
+      - name: accident_involvement_count
+        description: "{{ doc('column_accident_involvement_count') }}"
+
+    tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - claim_number_dd
+              - loss_party_id
+              - loss_party_role_id
+
+  - name: dim_loss_party
+    description: "{{ doc('table_dim_loss_party') }}"
+    columns:
+      - name: loss_party_id
+        tests:
+          - unique
+          - not_null
+
+        description: "{{ doc('column_loss_party_id') }}"
+  - name: dim_loss_party_role
+    description: "{{ doc('table_dim_loss_party_role') }}"
+    columns:
+      - name: loss_party_role_id
+        tests:
+          - unique
+          - not_null
+        description: "{{ doc('column_loss_party_role_id') }}"

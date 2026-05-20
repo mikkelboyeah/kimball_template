@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: dim_claim_profile
+    description: "{{ doc('table_dim_claim_profile') }}"
+    columns:
+      - name: claim_profile_id
+        description: "{{ doc('column_claim_profile_id') }}"
+        tests:
+          - unique
+          - not_null
+      - name: catastrophe_indicator
+        description: "{{ doc('column_catastrophe_indicator') }}"
+      - name: police_report_filed
+        description: "{{ doc('column_police_report_filed') }}"
+      - name: claim_report_method
+        description: "{{ doc('column_claim_report_method') }}"

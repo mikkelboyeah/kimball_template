@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: dim_date
+    description: "{{ doc('table_dim_date') }}"
+    columns:
+      - name: date_id
+        description: "{{ doc('column_date_id') }}"
+        tests:
+          - unique
+          - not_null
+      - name: full_date
+        description: "{{ doc('column_full_date') }}"
+      - name: year
+        description: "{{ doc('column_year') }}"
+      - name: month
+        description: "{{ doc('column_month') }}"
+      - name: month_name
+        description: "{{ doc('column_month_name') }}"
+      - name: quarter
+        description: "{{ doc('column_quarter') }}"
+      - name: day_of_week
+        description: "{{ doc('column_day_of_week') }}"
+      - name: is_weekend
+        description: "{{ doc('column_is_weekend') }}"
+      - name: is_holiday
+        description: "{{ doc('column_is_holiday') }}"

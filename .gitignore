@@ -1,0 +1,9 @@
+.venv/
+.dlt/
+__pycache__/
+.DS_Store
+data/*.duckdb
+*.log
+reports/node_modules/
+reports/.evidence*/
+transform/target/

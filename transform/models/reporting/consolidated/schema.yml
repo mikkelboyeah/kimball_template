@@ -1,0 +1,34 @@
+version: 2
+models:
+  - name: fact_insurance_consolidated_snapshot_reporting
+    config:
+      alias: fact_insurance_consolidated_snapshot
+    description: "{{ doc('table_fact_insurance_consolidated_snapshot') }}"
+  - name: dim_policyholder_consolidated
+    config:
+      alias: dim_policyholder
+    description: "{{ doc('table_dim_policyholder') }}"
+  - name: dim_coverage_consolidated
+    config:
+      alias: dim_coverage
+    description: "{{ doc('table_dim_coverage') }}"
+  - name: dim_policy_status_consolidated
+    config:
+      alias: dim_policy_status
+    description: "{{ doc('table_dim_policy_status') }}"
+  - name: dim_covered_item_consolidated
+    config:
+      alias: dim_covered_item
+    description: "{{ doc('table_dim_covered_item') }}"
+  - name: dim_claim_status_consolidated
+    config:
+      alias: dim_claim_status
+    description: "{{ doc('table_dim_claim_status') }}"
+  - name: dim_date_consolidated
+    config:
+      alias: dim_date
+    description: "{{ doc('table_dim_date') }}"
+  - name: dim_employee_consolidated
+    config:
+      alias: dim_employee
+    description: "{{ doc('table_dim_employee') }}"

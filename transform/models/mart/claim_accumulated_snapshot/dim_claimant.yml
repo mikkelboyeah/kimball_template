@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: dim_claimant
+    description: "{{ doc('table_dim_claimant') }}"
+    columns:
+      - name: claimant_id
+        description: "{{ doc('column_claimant_id') }}"
+        tests:
+          - unique
+          - not_null
+      - name: claimant_natural_id
+        description: "{{ doc('column_claimant_natural_id') }}"
+      - name: first_name
+        description: "{{ doc('column_first_name') }}"
+      - name: last_name
+        description: "{{ doc('column_last_name') }}"
+      - name: relationship_to_policyholder
+        description: "{{ doc('column_relationship_to_policyholder') }}"

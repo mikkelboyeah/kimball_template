@@ -1,0 +1,34 @@
+version: 2
+models:
+  - name: fact_policy_transaction_reporting
+    config:
+      alias: fact_policy_transaction
+    description: "{{ doc('table_fact_policy_transaction') }}"
+  - name: dim_policyholder_policy_transactions
+    config:
+      alias: dim_policyholder
+    description: "{{ doc('table_dim_policyholder') }}"
+  - name: dim_coverage_policy_transactions
+    config:
+      alias: dim_coverage
+    description: "{{ doc('table_dim_coverage') }}"
+  - name: dim_policy_transaction_type_policy_transactions
+    config:
+      alias: dim_policy_transaction_type
+    description: "{{ doc('table_dim_policy_transaction_type') }}"
+  - name: dim_covered_item_policy_transactions
+    config:
+      alias: dim_covered_item
+    description: "{{ doc('table_dim_covered_item') }}"
+  - name: dim_date_policy_transactions
+    config:
+      alias: dim_date
+    description: "{{ doc('table_dim_date') }}"
+  - name: dim_policy_transaction_audit_policy_transactions
+    config:
+      alias: dim_policy_transaction_audit
+    description: "{{ doc('table_dim_policy_transaction_audit') }}"
+  - name: dim_employee_policy_transactions
+    config:
+      alias: dim_employee
+    description: "{{ doc('table_dim_employee') }}"

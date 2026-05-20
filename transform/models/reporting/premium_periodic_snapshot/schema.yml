@@ -1,0 +1,30 @@
+version: 2
+models:
+  - name: fact_premium_periodic_snapshot_reporting
+    config:
+      alias: fact_premium_periodic_snapshot
+    description: "{{ doc('table_fact_premium_periodic_snapshot') }}"
+  - name: dim_policyholder_premium_periodic_snapshot
+    config:
+      alias: dim_policyholder
+    description: "{{ doc('table_dim_policyholder') }}"
+  - name: dim_coverage_premium_periodic_snapshot
+    config:
+      alias: dim_coverage
+    description: "{{ doc('table_dim_coverage') }}"
+  - name: dim_policy_status_premium_periodic_snapshot
+    config:
+      alias: dim_policy_status
+    description: "{{ doc('table_dim_policy_status') }}"
+  - name: dim_covered_item_premium_periodic_snapshot
+    config:
+      alias: dim_covered_item
+    description: "{{ doc('table_dim_covered_item') }}"
+  - name: dim_date_premium_periodic_snapshot
+    config:
+      alias: dim_date
+    description: "{{ doc('table_dim_date') }}"
+  - name: dim_employee_premium_periodic_snapshot
+    config:
+      alias: dim_employee
+    description: "{{ doc('table_dim_employee') }}"

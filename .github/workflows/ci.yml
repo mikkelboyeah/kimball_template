@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ main, master ]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Install Task
+        run: uv tool install go-task-bin
+
+      - name: Install Python deps
+        run: uv sync
+
+      - name: Bootstrap
+        run: task bootstrap
+
+      - name: Ingest Data
+        run: task ingest
+
+      - name: Build and Test dbt models
+        run: task transform

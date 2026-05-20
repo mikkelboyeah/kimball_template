@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: dim_covered_item
+    description: "{{ doc('table_dim_covered_item') }}"
+    columns:
+      - name: covered_item_id
+        description: "{{ doc('column_covered_item_id') }}"
+        tests:
+          - unique
+          - not_null
+      - name: item_type
+        description: "{{ doc('column_item_type') }}"
+      - name: item_description
+        description: "{{ doc('column_item_description') }}"
+      - name: appraised_value_range
+        description: "{{ doc('column_appraised_value_range') }}"

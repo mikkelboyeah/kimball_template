@@ -1,0 +1,68 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Raw mock insurance data in Parquet format.
+    schema: raw
+    tables:
+      - name: claim_accumulating_snapshot
+        description: Primary fact table for claims.
+        external:
+          location: "../data/raw/claim_accumulated_snapshot/claim_accumulating_snapshot.parquet"
+      - name: dim_date
+        external:
+          location: "../data/raw/claim_accumulated_snapshot/dim_date.parquet"
+      - name: dim_policyholder
+        external:
+          location: "../data/raw/claim_accumulated_snapshot/dim_policyholder.parquet"
+      - name: dim_coverage
+        external:
+          location: "../data/raw/claim_accumulated_snapshot/dim_coverage.parquet"
+      - name: dim_claimant
+        external:
+          location: "../data/raw/claim_accumulated_snapshot/dim_claimant.parquet"
+      - name: dim_claim_profile
+        external:
+          location: "../data/raw/claim_accumulated_snapshot/dim_claim_profile.parquet"
+      - name: dim_employee
+        external:
+          location: "../data/raw/claim_accumulated_snapshot/dim_employee.parquet"
+      - name: dim_covered_item
+        external:
+          location: "../data/raw/claim_accumulated_snapshot/dim_covered_item.parquet"
+      - name: dim_claim_status
+        external:
+          location: "../data/raw/claim_accumulated_snapshot/dim_claim_status.parquet"
+      - name: dim_claim
+        external:
+          location: "../data/raw/claim_accumulated_snapshot/dim_claim.parquet"
+      - name: fact_policy_transaction
+        description: Policy transaction fact table.
+        external:
+          location: "../data/raw/fact_policy_transactions/fact_policy_transaction.parquet"
+      - name: dim_policy_transaction_type
+        external:
+          location: "../data/raw/fact_policy_transactions/dim_policy_transaction_type.parquet"
+      - name: dim_policy_transaction_audit
+        external:
+          location: "../data/raw/fact_policy_transactions/dim_policy_transaction_audit.parquet"
+      - name: fact_premium_periodic_snapshot
+        external:
+          location: "../data/raw/premium_periodic_snapshot/fact_premium_periodic_snapshot.parquet"
+      - name: dim_policy_status
+        external:
+          location: "../data/raw/premium_periodic_snapshot/dim_policy_status.parquet"
+      - name: fact_claim_periodic_snapshot
+        external:
+          location: "../data/raw/claim_periodic_snapshot/fact_claim_periodic_snapshot.parquet"
+      - name: factless_accident_events
+        external:
+          location: "../data/raw/factless_accident_events/factless_accident_events.parquet"
+      - name: dim_loss_party
+        external:
+          location: "../data/raw/factless_accident_events/dim_loss_party.parquet"
+      - name: dim_loss_party_role
+        external:
+          location: "../data/raw/factless_accident_events/dim_loss_party_role.parquet"
+
+

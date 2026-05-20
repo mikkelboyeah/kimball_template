@@ -1,0 +1,42 @@
+version: 2
+models:
+  - name: fact_claim_periodic_snapshot_reporting
+    config:
+      alias: fact_claim_periodic_snapshot
+    description: "{{ doc('table_fact_claim_periodic_snapshot') }}"
+  - name: dim_policyholder_claim_periodic_snapshot
+    config:
+      alias: dim_policyholder
+    description: "{{ doc('table_dim_policyholder') }}"
+  - name: dim_coverage_claim_periodic_snapshot
+    config:
+      alias: dim_coverage
+    description: "{{ doc('table_dim_coverage') }}"
+  - name: dim_covered_item_claim_periodic_snapshot
+    config:
+      alias: dim_covered_item
+    description: "{{ doc('table_dim_covered_item') }}"
+  - name: dim_claim_status_claim_periodic_snapshot
+    config:
+      alias: dim_claim_status
+    description: "{{ doc('table_dim_claim_status') }}"
+  - name: dim_date_claim_periodic_snapshot
+    config:
+      alias: dim_date
+    description: "{{ doc('table_dim_date') }}"
+  - name: dim_claim_profile_claim_periodic_snapshot
+    config:
+      alias: dim_claim_profile
+    description: "{{ doc('table_dim_claim_profile') }}"
+  - name: dim_employee_claim_periodic_snapshot
+    config:
+      alias: dim_employee
+    description: "{{ doc('table_dim_employee') }}"
+  - name: dim_claimant_claim_periodic_snapshot
+    config:
+      alias: dim_claimant
+    description: "{{ doc('table_dim_claimant') }}"
+  - name: dim_claim_claim_periodic_snapshot
+    config:
+      alias: dim_claim
+    description: "{{ doc('table_dim_claim') }}"

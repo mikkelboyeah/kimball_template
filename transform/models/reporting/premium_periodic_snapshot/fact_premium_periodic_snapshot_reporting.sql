@@ -1,0 +1,1 @@
+select * from {{ ref('fact_premium_periodic_snapshot') }}

@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "dbt-transformation-patterns": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "computedHash": "27cdfcccfa62ef544ef8aa299aec7c1afca7b71a36606f992df3073aa058fe4f"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: dim_claim_status
+    description: "{{ doc('table_dim_claim_status') }}"
+    columns:
+      - name: claim_status_id
+        description: "{{ doc('column_claim_status_id') }}"
+        tests:
+          - unique
+          - not_null
+      - name: status_description
+        description: "{{ doc('column_status_description') }}"
+      - name: sub_status_description
+        description: "{{ doc('column_sub_status_description') }}"

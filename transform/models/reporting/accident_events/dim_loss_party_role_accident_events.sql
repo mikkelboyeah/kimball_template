@@ -1,0 +1,1 @@
+select * from {{ ref('dim_loss_party_role') }}

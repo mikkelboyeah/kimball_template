@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: dim_policy_transaction_audit
+    description: "{{ doc('table_dim_policy_transaction_audit') }}"
+    columns:
+      - name: policy_transaction_audit_id
+        description: "{{ doc('column_policy_transaction_audit_id') }}"
+        tests:
+          - unique
+          - not_null
+      - name: etl_job_name
+        description: "{{ doc('column_etl_job_name') }}"
+      - name: data_quality_flag
+        description: "{{ doc('column_data_quality_flag') }}"
+      - name: source_system
+        description: "{{ doc('column_source_system') }}"

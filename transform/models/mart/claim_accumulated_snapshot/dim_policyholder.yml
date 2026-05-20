@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: dim_policyholder
+    description: "{{ doc('table_dim_policyholder') }}"
+    columns:
+      - name: policyholder_id
+        description: "{{ doc('column_policyholder_id') }}"
+        tests:
+          - unique
+          - not_null
+      - name: policyholder_natural_id
+        description: "{{ doc('column_policyholder_natural_id') }}"
+      - name: first_name
+        description: "{{ doc('column_first_name') }}"
+      - name: last_name
+        description: "{{ doc('column_last_name') }}"
+      - name: city
+        description: "{{ doc('column_city') }}"
+      - name: state
+        description: "{{ doc('column_state') }}"
+      - name: zip_code
+        description: "{{ doc('column_zip_code') }}"
+      - name: customer_segment
+        description: "{{ doc('column_customer_segment') }}"

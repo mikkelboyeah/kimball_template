@@ -1,0 +1,30 @@
+name: "generic_project"
+version: "1.0.0"
+profile: "default"
+config-version: 2
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+macro-paths: ["macros"]
+seed-paths: ["seeds"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  generic_project:
+    staging:
+      +schema: staging
+      +materialized: view
+    intermediate:
+      +schema: intermediate
+      +materialized: ephemeral
+    mart:
+      +schema: mart
+      +materialized: table
+
+seeds:
+  generic_project:
+    +schema: seeds
+    +delimiter: ","
+    +quote_columns: true
+

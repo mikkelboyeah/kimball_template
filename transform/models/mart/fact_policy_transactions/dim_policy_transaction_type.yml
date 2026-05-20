@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: dim_policy_transaction_type
+    description: "{{ doc('table_dim_policy_transaction_type') }}"
+    columns:
+      - name: policy_transaction_type_id
+        description: "{{ doc('column_policy_transaction_type_id') }}"
+        tests:
+          - unique
+          - not_null
+      - name: transaction_category
+        description: "{{ doc('column_transaction_category') }}"
+      - name: transaction_reason_description
+        description: "{{ doc('column_transaction_reason_description') }}"
