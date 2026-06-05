@@ -13,7 +13,7 @@ dependencies = [
     "dlthub[duckdb]>=0.18.0",
     "go-task-bin>=3.45.5",
     "pandas>=2.0.0",
-    "pyarrow>=22.0.0",
+    "pyarrow>=23.0.1",
     "pytest>=9.0.2",
 ]
 
